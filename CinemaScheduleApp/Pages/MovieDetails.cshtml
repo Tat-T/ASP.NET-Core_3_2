@@ -1,0 +1,26 @@
+﻿@page "{title}"
+@model CinemaScheduleApp.Pages.MovieDetailsModel
+@{
+    ViewData["Title"] = Model.Movie?.Title ?? "Фильм не найден";
+}
+
+@if (Model.Movie != null)
+{
+    <h1>@Model.Movie.Title</h1>
+    <p><strong>Режиссёр:</strong> @Model.Movie.Director</p>
+    <p><strong>Стиль:</strong> @Model.Movie.Genre</p>
+    <p><strong>Описание:</strong> @Model.Movie.Description</p>
+    <h2>Сеансы</h2>
+    <ul>
+        @foreach (var showTime in Model.Movie.ShowTimes)
+        {
+            <li>@showTime</li>
+        }
+    </ul>
+    <a asp-page="/Schedule">Вернуться к расписанию</a>
+}
+else
+{
+    <h2>Фильм не найден</h2>
+    <a asp-page="/Schedule">Вернуться к расписанию</a>
+}
